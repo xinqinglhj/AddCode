@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddCode", "AddCode\AddCode.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommitBugLab", "CommitBug\CommitBugLab\CommitBugLab.csproj", "{8131122A-F774-4752-8656-36C2BF81A3E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommitBug", "CommitBug\CommitBug\CommitBug.csproj", "{5311028F-75D2-4F46-9599-F1680CEFC273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "CommitBug\CommitBug\Test.csproj", "{5311028F-75D2-4F46-9599-F1680CEFC273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -97,6 +97,7 @@ namespace AddCode
             }
             m.CodeText = code[0];
             c.Save(m);
+            Console.WriteLine("OK");
         }
 
 
