@@ -1,38 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
+using CommitBugLab.Interface;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 
 namespace CommitBugLab.Base
 {
-    public class CommitBugBase : IBugControllerInterface
+    public class CommitBugBase
     {
         readonly IDatabase _data = new MongoDbDatabase();
-        public void SetBug(BugModel model)
+        public List<BugModel> GetData(string guid)
         {
-            string jsonText = JsonConvert.SerializeObject(model);
-            _data.SetData(jsonText);
+            return _data.GetData(guid);
         }
 
-
-        public void GetBugAll()
+        public void SetData(BugModel model)
         {
-            _data.GetDataAll();
+            _data.SetData(model);
         }
-
-
-        public string SaveBug(Exception ex)
+        /// <summary>
+        /// 获取所有的对象，BsonDocument类型
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BsonDocument> GetBugModelsAll()
         {
-            var guid = Guid.NewGuid().ToString();
-            ex.HelpLink = guid;
-            string jsonText = JsonConvert.SerializeObject(ex);
-            _data.SetData(jsonText);
-            return guid;
+            return _data.GetDataAll();
         }
-
-        public string SaveBug(BugModel model)
+        /// <summary>
+        /// 获取对象，来自一个集合，自动转换
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public BugModel GetBugModel(string guid)
         {
-            var guid = Guid.NewGuid().ToString();
-            _data.MongoSetData(model);
-            return guid;
+            return _data.GetBugModel(guid);
         }
     }
 }

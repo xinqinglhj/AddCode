@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using CommitBugLab.Base;
+using MongoDB.Bson;
 
-namespace CommitBugLab
+namespace CommitBugLab.Interface
 {
     interface IDatabase
     {
-        void SetData(string text);
-        string GetDataAll();
+        void SetData(BugModel text);
 
-        void MongoSetData(Base.BugModel model);
+        List<BugModel> GetData(string guid);
+
+        IEnumerable<BsonDocument> GetDataAll();
+        BugModel GetBugModel(string guid);
     }
 }

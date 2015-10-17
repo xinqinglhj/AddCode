@@ -1,33 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using MongoDB.Bson;
 using System.Configuration;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Linq;
+using CommitBugLab.Help;
+using CommitBugLab.Interface;
 
 namespace CommitBugLab.Base
 {
-    public class MongoDbDatabase : IDatabase
+    internal class MongoDbDatabase : IDatabase
     {
-
-        public string GetDataAll()
+        readonly MongodbHelper _help = new MongodbHelper();
+        public void SetData(BugModel model)
         {
-            throw new NotImplementedException();
-        }
-
-        public void MongoSetData(BugModel model)
-        {
-            MongodbHelper h = new MongodbHelper();
-
             model.BrowserInfo = JsonConvert.SerializeObject(model.BrowserInfo);
-            model.exception = JsonConvert.SerializeObject(model.exception);
-            var task = h.Add(model);
+            model.Exception = JsonConvert.SerializeObject(model.Exception);
+            var task = _help.Add(model);
             //task.Wait();
         }
 
-        public void SetData(string text)
+        public List<BugModel> GetData(string guid)
         {
+            var items = _help.GetSingle(guid);
+            return null;
+        }
 
+        public IEnumerable<BsonDocument> GetDataAll()
+        {
+            var reus = _help.SelectBsonDocumentAll();
+            return reus;
+        }
 
+        public BugModel GetBugModel(string guid)
+        {
+            
+            return _help.GetSingle(guid);
         }
     }
 }
