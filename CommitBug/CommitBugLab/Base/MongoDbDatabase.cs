@@ -8,6 +8,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using CommitBugLab.Help;
 using CommitBugLab.Interface;
+using CommitBugLab.Model;
 
 namespace CommitBugLab.Base
 {

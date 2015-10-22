@@ -9,29 +9,29 @@ namespace AddCode
 {
     public class DataController
     {
-        public static string pathAddress = "D:\\code.txt";
+        public static string PathAddress = "D:\\code.txt";
         public bool Save(Model model)
         {
-            string base64Code = convertBase64(model.CodeText, Converts.Convert);
-            string address = convertBase64(model.CodeName, Converts.Convert);
+            var base64Code = ConvertBase64(model.CodeText, Converts.Convert);
+            var address = ConvertBase64(model.CodeName, Converts.Convert);
 
 
-            StreamWriter w = new StreamWriter(pathAddress, true);
+            var w = new StreamWriter(PathAddress, true);
             w.WriteLine(model.CodeCreateTime + " " + address + " " + base64Code);
             w.Close();
             return true;
         }
-        public static string convertBase64(string code, Converts conv)
+        public static string ConvertBase64(string code, Converts conv)
         {
             if (conv == Converts.Convert)
             {
-                byte[] bytes = Encoding.Default.GetBytes(code);
+                var bytes = Encoding.Default.GetBytes(code);
                 return Convert.ToBase64String(bytes);
             }
             else
             {
                 //解码：
-                byte[] outputb = Convert.FromBase64String(code);
+                var outputb = Convert.FromBase64String(code);
                 return Encoding.Default.GetString(outputb);
 
             }
@@ -39,14 +39,14 @@ namespace AddCode
 
         public static string[] GetAllCode()
         {
-            StreamReader read = new StreamReader(pathAddress);
-            if (!File.Exists(pathAddress))
+            var read = new StreamReader(PathAddress);
+            if (!File.Exists(PathAddress))
             {
                 return null;
             }
             else
             {
-                List<string> list = new List<string>();
+                var list = new List<string>();
 
                 var test = read.ReadToEnd().Replace("\r\n", "$").Split('$');
                 return test;

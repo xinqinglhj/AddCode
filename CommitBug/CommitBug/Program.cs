@@ -36,6 +36,7 @@ namespace CommitBug
             var newOrderby = lift.OrderBy(x => x);
             Console.WriteLine(string.Join(",", newOrderby));
 
+            newOrderby.Aggregate("", (x, y) => x + "," + y);
         }
     }
 }

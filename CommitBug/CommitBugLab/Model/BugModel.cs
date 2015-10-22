@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Web;
-namespace CommitBugLab.Base
+
+namespace CommitBugLab.Model
 {
     public class BugModel
     {
 
         public BugModel()
         {
-            this.BugCreateTime = DateTime.Now.ToString("yy-MM-dd HH:mm:ss");
+            this.BugCreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             this.Id = Guid.NewGuid().ToString();
         }
 

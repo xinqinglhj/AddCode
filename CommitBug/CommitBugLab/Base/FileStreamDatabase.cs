@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using CommitBugLab.Interface;
+using CommitBugLab.Model;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 

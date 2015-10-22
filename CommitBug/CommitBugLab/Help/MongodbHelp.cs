@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CommitBugLab.Base;
+using CommitBugLab.Model;
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Driver;
@@ -25,12 +26,14 @@ namespace CommitBugLab.Help
 
         public MongodbHelper()
         {
+
             // 创建数据连接
             var client = new MongoClient(Conn);
             // 获取指定数据库
             _dbDatabase = client.GetDatabase(DbName);
         }
 
+        //添加一条数据
         public async Task Add<T>(T t)
         {
             // 获取表
@@ -39,6 +42,7 @@ namespace CommitBugLab.Help
             // 插入
             await collection.InsertOneAsync(t);
         }
+
         //获取mongodb连接
         public IMongoCollection<T> GetCollection<T>()
         {
@@ -50,7 +54,6 @@ namespace CommitBugLab.Help
         {
             var collection = _dbDatabase.GetCollection<T>(TbName);
             var filter = Builders<T>.Filter.Eq("id", id);
-
             await collection.DeleteOneAsync(filter);
         }
 
