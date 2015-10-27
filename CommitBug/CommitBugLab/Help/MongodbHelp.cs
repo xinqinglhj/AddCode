@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using CommitBugLab.Base;
 using CommitBugLab.Model;
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
