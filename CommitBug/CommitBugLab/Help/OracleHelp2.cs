@@ -1,9 +1,11 @@
 ﻿
 using System;
 using System.Data;
-using System.Data.OracleClient;
 using System.Collections;
 using System.Reflection;
+using Oracle.ManagedDataAccess.Client;
+using static System.Configuration.ConfigurationSettings;
+
 namespace MyOraComm
 {
     /// <summary>
@@ -12,11 +14,10 @@ namespace MyOraComm
     public class ConnForOracle
     {
         protected OracleConnection Connection;
-        private string connectionString;
+        private readonly string connectionString;
         public ConnForOracle()
         {
-            string connStr;
-            connStr = System.Configuration.ConfigurationSettings.AppSettings["connStr"].ToString();
+            var connStr = AppSettings["connStr"].ToString();
             connectionString = connStr;
             Connection = new OracleConnection(connectionString);
         }
@@ -25,13 +26,13 @@ namespace MyOraComm
         /// <summary>
         /// 带参数的构造函数
         /// </summary>
-        /// <param name="ConnString">数据库联接字符串</param>
-        public ConnForOracle(string ConnString)
+        /// <param name="connString">数据库联接字符串</param>
+        public ConnForOracle(string connString)
         {
-            string connStr;
-            connStr = System.Configuration.ConfigurationSettings.AppSettings[ConnString].ToString();
+            var connStr = AppSettings[connString].ToString();
             Connection = new OracleConnection(connStr);
         }
+
         #endregion
 
         #region 打开数据库
@@ -66,7 +67,7 @@ namespace MyOraComm
         {
             DataSet dataSet = new DataSet();
             OpenConn();
-            OracleDataAdapter OraDA = new OracleDataAdapter(sql, Connection);
+            var OraDA = new OracleDataAdapter(sql, Connection);
             OraDA.Fill(dataSet, DataSetName);
             //   CloseConn();
             return dataSet;
@@ -307,7 +308,7 @@ namespace MyOraComm
             {
                 if (i == 0)
                 {
-                    if (ht_Where.ToString().ToLower().IndexOf((myEnumerator.Key + "=:" + myEnumerator.Key).ToLower()) == -1)
+                    if (ht_Where.ToString().ToLower().IndexOf((myEnumerator.Key + "=:" + myEnumerator.Key).ToLower(), StringComparison.Ordinal) == -1)
                     {
                         str_Sql = myEnumerator.Key + "=:" + myEnumerator.Key;
                     }
